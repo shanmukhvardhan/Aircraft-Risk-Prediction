@@ -1,0 +1,24 @@
+# Data Engineering & Validation
+polars
+pandas
+numpy
+great_expectations
+
+# Machine Learning & AI
+scikit-learn
+joblib
+
+# Explainable AI (XAI)
+lime
+shap
+
+# Web & API Frameworks
+streamlit
+fastapi
+uvicorn
+pydantic
+requests
+
+# Visualization
+plotly
+matplotlib
