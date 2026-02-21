@@ -8,8 +8,19 @@ from lime_analysis import get_lime_explanation
 
 @st.cache_resource
 def load_assets():
-    model = joblib.load('models/engine_vibration_xai.pkl')
-    data = pd.read_csv('data/aircraft_sensor_data.csv').drop(columns=['Risk']).head(100)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Create absolute paths to your files
+    model_path = os.path.join(current_dir, 'models', 'engine_vibration_xai.pkl')
+    data_path = os.path.join(current_dir, 'data', 'aircraft_sensor_data.csv')
+    
+    # Check if files exist before loading to avoid generic crashes
+    if not os.path.exists(model_path):
+        st.error(f"Model not found at {model_path}")
+        st.stop()
+
+    model = joblib.load(model_path)
+    data = pd.read_csv(data_path).drop(columns=['Risk']).head(100)
     return model, data
 
 # Inside your start_btn logic:
@@ -164,5 +175,6 @@ if start_btn:
                     st.dataframe(pd.DataFrame(st.session_state.flight_log), use_container_width=True, hide_index=True)
                 else:
                     st.info("No anomalies detected. Telemetry stable.")
+
 
             time.sleep(1)
