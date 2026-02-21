@@ -13,7 +13,7 @@ lime
 shap
 
 # Web & API Frameworks
-streamlit
+streamlit>=1.35.0
 fastapi
 uvicorn
 pydantic
