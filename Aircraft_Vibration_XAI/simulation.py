@@ -95,7 +95,7 @@ with st.sidebar:
     start_btn = st.button("START")
 
 dashboard = st.empty()
-
+base_path = os.path.dirname(__file__)
 if start_btn:
     model_path = os.path.join(base_path, 'models', 'engine_vibration_xai.pkl')
     data_path = os.path.join(base_path, 'data', 'aircraft_sensor_data.csv')
@@ -181,5 +181,6 @@ if start_btn:
 
 
             time.sleep(1)
+
 
 
