@@ -68,3 +68,7 @@ While I am proud of the current build, there are always other paths:
 2.  Install dependencies: `pip install -r requirements.txt`.
 3.  Start the API: `python api.py`.
 4.  Launch the Cockpit: `streamlit run simulation.py`.
+
+---
+
+##Live Demo : https://aircraft-risk-prediction-nzn76paph4pmtauvpummlr.streamlit.app/
