@@ -11,11 +11,10 @@ import os
 def load_assets():
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # Create absolute paths to your files
+    
     model_path = os.path.join(current_dir, 'models', 'engine_vibration_xai.pkl')
     data_path = os.path.join(current_dir, 'data', 'aircraft_sensor_data.csv')
     
-    # Check if files exist before loading to avoid generic crashes
     if not os.path.exists(model_path):
         st.error(f"Model not found at {model_path}")
         st.stop()
@@ -24,7 +23,6 @@ def load_assets():
     data = pd.read_csv(data_path).drop(columns=['Risk']).head(100)
     return model, data
 
-# Inside your start_btn logic:
 model_pipeline, training_sample = load_assets()
 PHASES = [
     {"name": "TAXI & CHECKLIST", "duration": 8, "base": [12000, 450, 1.1, 85]},
@@ -99,8 +97,12 @@ with st.sidebar:
 dashboard = st.empty()
 
 if start_btn:
-    model_pipeline = joblib.load('models/engine_vibration_xai.pkl')
-    training_sample = pd.read_csv('data/aircraft_sensor_data.csv').drop(columns=['Risk']).head(100)
+    model_path = os.path.join(base_path, 'models', 'engine_vibration_xai.pkl')
+    data_path = os.path.join(base_path, 'data', 'aircraft_sensor_data.csv')
+    
+    
+    model_pipeline = joblib.load(model_path)
+    training_sample = pd.read_csv(data_path).drop(columns=['Risk']).head(100)
     feature_names = ['Engine Rotation Speed', 'Engine Temperature', 'Engine Vibration', 'Noise']
 
     for phase in PHASES:
@@ -179,4 +181,5 @@ if start_btn:
 
 
             time.sleep(1)
+
 
